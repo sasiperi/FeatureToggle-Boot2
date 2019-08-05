@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+		<th:block th:include="fragments/meta" />	
+	    <th:block th:include="fragments/css" />
+		<th:block th:include="fragments/shim" />
+		<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> -->
+	    
+	    <title>Add Person</title>	
+	</head>
+   <body>
+      <h1>Create a Person:</h1>
+      
+      <div class="container">
+	     <!--  <h1>
+				<span>Create a Person:</span>
+		  </h1> -->
+       
+      <!--  
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}         
+         -->
+          
+      <form th:action="@{/addPerson}" th:object="${personForm}" method="POST" class="form-horizontal">
+      
+	      <div class="form-group">
+			<label for="firstName" class="col-sm-2 control-label">First Name</label>
+ 			<div class="col-sm-5">
+				<input type="text" th:field="*{firstName}" placeholder="First Name" class="form-control" autofocus="autofocus"></input>				
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="lastName" class="col-sm-2 control-label">Last Name</label>
+			<div class="col-sm-5">
+				<input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control"></input>				
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="whoIs" class="col-sm-2 control-label">Who Is</label>
+			<div class="col-sm-5">
+				<input type="text" th:field="*{whoIs}" placeholder="Who Is" class="form-control"></input>				
+			</div>
+		  </div>
+       
+         <div class="form-group">            
+            <div class="col-sm-offset-2 col-sm-5">
+				 <button type="submit" class="btn btn-info">
+					<span class="glyphicon glyphicon-ok"></span> Create
+				 </button>
+			 </div>
+		 </div>
+			
+      </form>
+       
+      <br/>
+       
+      <!-- Check if errorMessage is not null and not empty -->
+       
+      <div th:if="${errorMessage}" th:utext="#{error.message}"
+         style="color:red;font-style:italic;">
+         ...
+      </div>
+      
+      </div>
+      
+      <div th:replace="fragments/footer :: footer"/>
+       
+   </body>
+</html>

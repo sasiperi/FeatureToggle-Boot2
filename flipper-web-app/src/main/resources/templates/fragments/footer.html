@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   
+   <head>
+        <meta charset="UTF-8" />
+		<th:block th:include="fragments/meta" />	
+	    <th:block th:include="fragments/css" />
+		<th:block th:include="fragments/shim" />
+		<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> -->
+	    
+	    <title>Sign Out</title>	
+	</head>
+	
+   <body>
+   	<div th:fragment="footer">
+
+	   <div class="container">
+	
+	        <footer>
+	        <!-- this is footer -->
+	        © SP
+	            <span sec:authorize="isAuthenticated()">
+	                | Logged user: <span sec:authentication="name"></span> |
+	                Roles: <span sec:authentication="principal.authorities"></span> |
+	                <a th:href="@{/logout}">Sign Out</a>
+	            </span>
+	
+	        <script type="text/javascript"
+	                src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	        </footer>
+	    </div>
+
+	</div>
+   </body>
+</html>

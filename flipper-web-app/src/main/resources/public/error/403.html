@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>	
+	    <meta charset="UTF-8" />
+		<th:block th:include="fragments/meta" />	
+	    <th:block th:include="fragments/css" />
+		<th:block th:include="fragments/shim" />	
+	    <title>Access Errors</title>		
+	</head>
+
+
+	<body>
+	   <div class="container">
+			<h1>403 - Acces Denied</h1>
+			 		
+				<span class="glyphicon glyphicon-remove-sign"></span>
+				<p th:text="${error}" class="badge btn-danger">	Error Info </p>					
+			 
+      </div>
+	</body>
+	
+</html>

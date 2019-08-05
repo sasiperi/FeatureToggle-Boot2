@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+        <meta charset="UTF-8" />
+		<th:block th:include="fragments/meta" />	
+	    <th:block th:include="fragments/css" />
+		<th:block th:include="fragments/shim" />
+		<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> -->
+	    
+	    <!-- <title th:text="#{searchResults.title}">Welcome</title>	 -->
+	    <title>Welcome</title>	
+	</head>
+   <body>
+    <div class="container">
+      <h1>Welcome</h1>
+      <h2 th:utext="#{welcome.message}">..!..</h2>
+		<p>
+			Envelope icon as a link: <a href="#"><span
+				class="glyphicon glyphicon-envelope"></span></a>
+		</p>
+
+		<!--  
+       
+         In Thymeleaf the equivalent of
+         JSP's ${pageContext.request.contextPath}/edit.html
+         would be @{/edit.html}
+          
+         -->
+          
+      <a th:href="@{/personList}">Person List</a>  
+     </div> 
+     <div th:replace="fragments/footer :: footer"/>
+     
+   </body>
+    
+</html>

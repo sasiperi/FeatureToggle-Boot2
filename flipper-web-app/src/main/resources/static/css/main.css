@@ -1,0 +1,42 @@
+TABLE.dataTable
+{
+	width:100%;
+}
+TABLE.dataTable TFOOT TR TH 
+{
+	color:#777;
+	font-weight:bold;
+}
+TABLE.dataTable TFOOT TR TH INPUT[type='text'] 
+{
+	color:#777;
+	font-weight:normal;
+}
+TABLE.dataTable TFOOT TR TH SPAN INPUT[type='date'] 
+{
+	color:#777;
+	font-weight:normal;
+}
+TABLE.dataTable TFOOT TR TH SPAN SELECT 
+{
+	color:#777;
+	font-weight:normal;
+}
+TABLE.dataTable TFOOT TR TH SPAN SELECT OPTION 
+{
+	color:#777;
+	font-weight:normal;
+}
+.search_init 
+{
+	color:#777;
+	font-weight:normal;
+}
+.help-block 
+{
+	color:#A94441;
+}
+.centered
+{
+	text-align:center;
+}
