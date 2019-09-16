@@ -12,15 +12,13 @@ import org.springframework.context.annotation.Primary;
 public class DBConfig
 {
 
-    
-      @Bean(name = "datasource")      
-      @ConfigurationProperties("spring.datasource")      
-      @Primary 
-      public DataSource dataSource()
-      { 
-          return DataSourceBuilder.create().build(); 
-      }
-     
+    @Bean(name = "datasource")
+    @ConfigurationProperties("spring.datasource")
+    @Primary
+    public DataSource dataSource()
+    {
+        return DataSourceBuilder.create().build();
+    }
 
     @Bean(name = "ff4jDataSource")
     @ConfigurationProperties("ff4j.datasource")

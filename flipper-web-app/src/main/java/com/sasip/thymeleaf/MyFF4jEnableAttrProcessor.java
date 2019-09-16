@@ -9,25 +9,24 @@ import org.thymeleaf.templatemode.TemplateMode;
 
 public class MyFF4jEnableAttrProcessor extends AbstractStandardConditionalVisibilityTagProcessor
 {
-    
+
     private FF4j ff4j;
 
-    protected MyFF4jEnableAttrProcessor(final String dialectPrefix, FF4j ff4j) 
+    protected MyFF4jEnableAttrProcessor(final String dialectPrefix, FF4j ff4j)
     {
         super(TemplateMode.HTML, dialectPrefix, "enable", 11);
         this.ff4j = ff4j;
     }
 
-   
-
     @Override
-    protected boolean isVisible(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue) 
+    protected boolean isVisible(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue)
     {
         final String feature = attributeValue;
-        if (feature == null || feature.trim().equals("")) {
+        if (feature == null || feature.trim().equals(""))
+        {
             return false;
         }
-        
+
         return ff4j.check(feature);
     }
 

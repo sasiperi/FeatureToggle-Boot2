@@ -17,84 +17,42 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ConditionalOnClass({ConsoleServlet.class, FF4jDispatcherServlet.class})
-//@AutoConfigureAfter(FF4jConfiguration.class)
-public class FF4JConfig extends SpringBootServletInitializer {
-	
-	@Autowired
-    private DataSource dataSource;
-    	
-		
-	@Bean
-	public ServletRegistrationBean<FF4jDispatcherServlet> ff4jDispatcherServletRegistrationBean(FF4jDispatcherServlet ff4jDispatcherServlet) 
-	{
-		ServletRegistrationBean<FF4jDispatcherServlet> bean = new ServletRegistrationBean<FF4jDispatcherServlet>(ff4jDispatcherServlet, "/demo-features/*");
-		bean.setName("ff4j-console");
-		bean.setLoadOnStartup(1);
-		return bean;
-	}
+@ConditionalOnClass({ ConsoleServlet.class, FF4jDispatcherServlet.class })
+public class FF4JConfig extends SpringBootServletInitializer
+{
 
-	@Bean
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public ServletRegistrationBean<FF4jDispatcherServlet> ff4jDispatcherServletRegistrationBean(FF4jDispatcherServlet ff4jDispatcherServlet)
+    {
+        ServletRegistrationBean<FF4jDispatcherServlet> bean = new ServletRegistrationBean<FF4jDispatcherServlet>(ff4jDispatcherServlet, "/demo-features/*");
+        bean.setName("ff4j-console");
+        bean.setLoadOnStartup(1);
+        return bean;
+    }
+
+    @Bean
     @ConditionalOnMissingBean
-    public FF4jDispatcherServlet getFF4jDispatcherServlet() {
+    public FF4jDispatcherServlet getFF4jDispatcherServlet()
+    {
         FF4jDispatcherServlet ff4jConsoleServlet = new FF4jDispatcherServlet();
         ff4jConsoleServlet.setFf4j(getFF4j());
         return ff4jConsoleServlet;
     }
-	
-	/**
-	 * STANDALONE XML BASED EXAMPLE
-	 */
 
-	/*@Bean
-	public FF4j getFF4j() { 
-		
-		FF4j ff4j = new FF4j("ff4j.xml");
-		ff4j
-		.createFeature("sasi-f1")
-        .createFeature("Awesome-Sasi-1-Feature")
-        .createFeature("f2").createFeature("sasi-f2")
-        .createProperty(new PropertyString("SampleProperty", "go-sasi!"))
-        .createProperty(new PropertyInt("SamplePropertyIn", 12));
-		
-		Feature exp = new Feature("exp-sasi");
-        exp.setFlippingStrategy(new ExpressionFlipStrategy("exp-sasi", "f1 & f2 | !f1 | f2"));
-        ff4j.createFeature(exp);
-        
-        
-		return ff4j; 
-	}*/
-	
-	/*@Bean
-    public DataSource dataSource(CacheManager cacheManager) {
-        log.info("Configuring JDBC datasource from a cloud provider");
-        DataSource dataSource = connectionFactory().dataSource();
-        return dataSource;
-    }*/
-	
     @Bean
-    public FF4j getFF4j() 
+    public FF4j getFF4j()
     {
         FF4j ff4j = new FF4j();
         ff4j.setFeatureStore(new FeatureStoreSpringJdbc(dataSource));
         ff4j.setPropertiesStore(new PropertyStoreSpringJdbc(dataSource));
         ff4j.setEventRepository(new EventRepositorySpringJdbc(dataSource));
-        
+
+        // Audit capabilities
         ff4j.audit(true);
-        
-        // ADD FEATURES PROGRAMATICALLY
-        
-       /* ff4j
-		.createFeature("sasi-f1")
-        .createFeature("Awesome-Sasi-1-Feature")
-        .createFeature("f2").createFeature("sasi-f2")
-        .createProperty(new PropertyString("SampleProperty", "go-sasi!"))
-        .createProperty(new PropertyInt("SamplePropertyIn", 12));
-		
-		Feature exp = new Feature("exp-sasi");
-        exp.setFlippingStrategy(new ExpressionFlipStrategy("exp-sasi", "f1 & f2 | !f1 | f2"));
-        ff4j.createFeature(exp);*/
-        
+
         return ff4j;
     }
 

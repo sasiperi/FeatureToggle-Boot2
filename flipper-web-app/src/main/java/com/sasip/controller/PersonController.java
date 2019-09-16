@@ -34,17 +34,17 @@ public class PersonController
 {
 
     private static final Logger LOG = LoggerFactory.getLogger(PersonController.class);
-    
+
     @FF4JFeature(value = "sasi-f1")
     private boolean feature_X;
 
     @Autowired
     private FF4j ff4j;
-    
+
     @Autowired
     @Qualifier("caluculationServiceDecimal")
     CalculationsService calcSvc;
-    
+
     private static List<Person> persons = new ArrayList<Person>();
 
     static
@@ -67,8 +67,7 @@ public class PersonController
 
         return "index";
     }
-    
-      
+
     @GetMapping("/login")
     public String login()
     {
@@ -77,30 +76,27 @@ public class PersonController
 
     @RequestMapping(value = { "/personList" }, method = RequestMethod.GET)
     public String personList(Model model, HttpServletRequest request)
-    {        
-        /*        
-        if(ff4j.check("featurename"))
-        {
-        	
-        }
-        */
-        if(feature_X)
+    {
+        /*
+         * if(ff4j.check("featurename")) {
+         * 
+         * }
+         */
+        if (feature_X)
         {
             LOG.info(" SASI-F1 ON");
-        }
-        else
+        } else
         {
             LOG.info(" SASI-F1 OFF");
         }
-        
+
         setClientInFlipContext(model, request);
-       
-        model.addAttribute("persons", persons);        
+
+        model.addAttribute("persons", persons);
 
         return "personList";
     }
 
-   
     @RequestMapping(value = { "/addPerson" }, method = RequestMethod.GET)
     public String showAddPersonPage(Model model)
     {
@@ -134,26 +130,25 @@ public class PersonController
 
     @RequestMapping(value = { "/removePerson/{index}" }, method = RequestMethod.GET)
     public String removePerson(Model model, @PathVariable int index)
-    {        
-            persons.remove(index);
-            return "redirect:/personList";
-      
-    }
-    
-    @RequestMapping(value = { "/addNumbers" }, method = RequestMethod.POST)
-    public String addNumbers(RedirectAttributes redirectModel, @RequestParam("numOne") int numOne, @RequestParam("numTwo") int numTwo)
-    {        
-            String sum = calcSvc.addNumbers(numOne, numTwo);
-            redirectModel.addFlashAttribute("sum",sum);
-            return "redirect:/personList";
-      
+    {
+        persons.remove(index);
+        return "redirect:/personList";
+
     }
 
-    
+    @RequestMapping(value = { "/addNumbers" }, method = RequestMethod.POST)
+    public String addNumbers(RedirectAttributes redirectModel, @RequestParam("numOne") int numOne, @RequestParam("numTwo") int numTwo)
+    {
+        String sum = calcSvc.addNumbers(numOne, numTwo);
+        redirectModel.addFlashAttribute("sum", sum);
+        return "redirect:/personList";
+
+    }
+
     @RequestMapping(value = { "/modifyPerson/{firstName}/{lastName}/{whoIs}" }, method = RequestMethod.POST)
     public String modifyPerson(Model model, @PathVariable String firstName, @PathVariable String lastName, @PathVariable String whoIs)
     {
-       
+
         if (firstName != null && firstName.length() > 0 //
                 && lastName != null && lastName.length() > 0)
         {
@@ -166,33 +161,36 @@ public class PersonController
         model.addAttribute("errorMessage", true);
         return "addPerson";
     }
-    
+
     private void setClientInFlipContext(Model model, HttpServletRequest request)
     {
         FlippingExecutionContext fex = new FlippingExecutionContext();
         fex.addValue(ClientFilterStrategy.CLIENT_HOSTNAME, getClientIp(request));
-        if(ff4j.check("client-feature",fex))
+        if (ff4j.check("client-feature", fex))
         {
             model.addAttribute("changeLook", true);
         }
-        
+
     }
-    
-    private String getClientIp(HttpServletRequest request) {
+
+    private String getClientIp(HttpServletRequest request)
+    {
 
         String remoteAddr = "";
 
-        if (request != null) {
+        if (request != null)
+        {
             remoteAddr = request.getHeader("X-FORWARDED-FOR");
             LOG.info("X-FORWARDED-FOR : " + remoteAddr);
-            if (remoteAddr == null || "".equals(remoteAddr)) {
+            if (remoteAddr == null || "".equals(remoteAddr))
+            {
                 remoteAddr = request.getRemoteAddr();
-                
+
                 LOG.info("Remote Addr : " + remoteAddr);
-            }           
+            }
         }
 
         return remoteAddr;
     }
-   
+
 }

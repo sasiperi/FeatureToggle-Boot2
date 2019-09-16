@@ -1,0 +1,40 @@
+---
+    
+server:
+  port: 8888
+
+spring:
+  application:
+    name: sasi-congig-server
+  profiles:    active:    - native
+    
+      
+  #zipkin:
+    #base-url: http://localhost:8085
+    #service:
+      #name: ${spring.application.name:sasi-congig-server}     
+  #sleuth:
+    #sampler:
+      #percentage: 1.0
+ 
+  #cloud:
+    #config:
+     # server:
+      #  git:
+       #   uri: https://github.com/sasiperi/po-test-config-server          
+        #  search-paths: config, config/app*
+        #encrypt:
+         #enabled: false
+  
+        
+security:
+  basic:
+    enabled: true    
+  user:
+    name: test
+    password: test 
+  
+logging:
+  level:
+    org.springframework.cloud.sleuth: DEBUG
+

@@ -17,10 +17,9 @@ public class MyFF4JDialect extends AbstractProcessorDialect
 
     public MyFF4JDialect()
     {
-    	super("FF4JDialect", "ff4j", 10);
+        super("FF4JDialect", "ff4j", 10);
     }
 
-    
     public void setFF4J(FF4j ff4j)
     {
         this.ff4j = ff4j;
@@ -33,9 +32,9 @@ public class MyFF4JDialect extends AbstractProcessorDialect
     public Set<IProcessor> getProcessors(String dialectPrefix)
     {
         final Set<IProcessor> processors = new HashSet<IProcessor>();
-        processors.add(new MyFF4jEnableAttrProcessor(dialectPrefix,ff4j));
-        processors.add(new MyFF4jDisableAttrProcessor(dialectPrefix,ff4j));
-        return processors;        
-       
+        processors.add(new MyFF4jEnableAttrProcessor(dialectPrefix, ff4j));
+        processors.add(new MyFF4jDisableAttrProcessor(dialectPrefix, ff4j));
+        return processors;
+
     }
 }

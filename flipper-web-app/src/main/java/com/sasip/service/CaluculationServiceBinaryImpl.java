@@ -13,13 +13,15 @@ import org.springframework.stereotype.Component;
 public class CaluculationServiceBinaryImpl implements CalculationsService
 {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.sasip.service.CalculationsService#addNumbers(int, int)
      */
     @Override
     public String addNumbers(int numOne, int numTwo)
     {
-        return Integer.toBinaryString(numOne+numTwo);
+        return Integer.toBinaryString(numOne + numTwo);
     }
 
 }

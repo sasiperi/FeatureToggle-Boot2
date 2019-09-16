@@ -13,13 +13,15 @@ import org.springframework.stereotype.Component;
 public class CaluculationServiceDecimalImpl implements CalculationsService
 {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.sasip.service.CalculationsService#addNumbers(int, int)
      */
     @Override
     public String addNumbers(int numOne, int numTwo)
     {
-        return Integer.toString(numOne+numTwo);
+        return Integer.toString(numOne + numTwo);
     }
 
 }

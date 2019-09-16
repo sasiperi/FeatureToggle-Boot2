@@ -11,7 +11,7 @@ public class Person
     {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.whoIs=whoIs;
+        this.whoIs = whoIs;
     }
 
     public String getFirstName()

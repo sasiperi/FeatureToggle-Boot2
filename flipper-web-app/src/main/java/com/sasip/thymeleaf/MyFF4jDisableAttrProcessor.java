@@ -7,7 +7,6 @@ import org.thymeleaf.model.IProcessableElementTag;
 import org.thymeleaf.standard.processor.AbstractStandardConditionalVisibilityTagProcessor;
 import org.thymeleaf.templatemode.TemplateMode;
 
-
 public class MyFF4jDisableAttrProcessor extends AbstractStandardConditionalVisibilityTagProcessor
 {
 
@@ -15,17 +14,16 @@ public class MyFF4jDisableAttrProcessor extends AbstractStandardConditionalVisib
 
     protected MyFF4jDisableAttrProcessor(final String dialectPrefix, FF4j ff4j)
     {
-    	super(TemplateMode.HTML, dialectPrefix, "disable", 10);
-    	 this.ff4j = ff4j;
+        super(TemplateMode.HTML, dialectPrefix, "disable", 10);
+        this.ff4j = ff4j;
     }
 
-  
-  
     @Override
-    protected boolean isVisible(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue) 
+    protected boolean isVisible(ITemplateContext context, IProcessableElementTag tag, AttributeName attributeName, String attributeValue)
     {
-    	final String feature = attributeValue;
-        if (feature == null || feature.trim().equals("")) {
+        final String feature = attributeValue;
+        if (feature == null || feature.trim().equals(""))
+        {
             return false;
         }
 

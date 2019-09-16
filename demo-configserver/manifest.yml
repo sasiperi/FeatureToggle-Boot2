@@ -1,0 +1,8 @@
+---
+applications:
+- name: sasi-congig-server
+  #memory: 1G
+  random-route: true
+  path: target/po-configserver-demo-0.0.1-SNAPSHOT.jar
+  #buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  host: sasi-congig-server

@@ -8,13 +8,11 @@ public class EncodePassword
     public static void main(String arga[])
     {
         PasswordEncoder pe = new BCryptPasswordEncoder();
-        
+
         System.out.println(pe.encode("sasi"));
         System.out.println(pe.encode("peri"));
-        
-        System.out.println(Integer.toBinaryString(1+1));
-                
+
+        System.out.println(Integer.toBinaryString(1 + 1));
+
     }
 }
-
-

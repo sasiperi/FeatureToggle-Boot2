@@ -11,46 +11,36 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
-@EnableWebSecurity(debug=false)
-public class WebSecurityConfig extends  WebSecurityConfigurerAdapter
+@EnableWebSecurity(debug = false)
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter
 {
-   /* @Autowired
-    private AccessDeniedHandler accessDeniedHandler;*/
-    
+    /*
+     * @Autowired private AccessDeniedHandler accessDeniedHandler;
+     */
+
     @Autowired
     private DataSource dataSource;
-    
-       @Override
-       protected void configure(HttpSecurity http) throws Exception
-       {
-             http.csrf().disable()
-                 .authorizeRequests() 
-                     .antMatchers("/removePerson","/modifyPerson","/addPerson").hasRole("ADMIN")
-                     .antMatchers("/css/**","/fonts/**","/images/**","/js/**","/favicon.ico").permitAll()
-                     .antMatchers("/**").hasAnyRole("USER","ADMIN")                                          
-                     .anyRequest().authenticated()
-                   .and()
-                   .formLogin()
-                       .loginPage("/login").permitAll()
-                   .and().logout().permitAll();
-                       //.logout().logoutUrl("/logout").permitAll().logoutSuccessUrl("/login");
-                       //.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-       }
-       
-       @Override
-       protected void configure(AuthenticationManagerBuilder auth) throws Exception 
-       {
-           auth
-             .jdbcAuthentication()
-             .dataSource(dataSource)
-             .passwordEncoder(new BCryptPasswordEncoder());  
-       }
-             
-      /* @Bean
-       public UserDetailsService userDetailsService() {
-           InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
-           manager.createUser(User.withUsername("user").password("password")
-               .roles("USER").build());
-           return manager;
-       }*/
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception
+    {
+        http.csrf().disable().authorizeRequests().antMatchers("/removePerson", "/modifyPerson", "/addPerson").hasRole("ADMIN")
+                .antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/favicon.ico").permitAll().antMatchers("/**").hasAnyRole("USER", "ADMIN").anyRequest().authenticated().and().formLogin()
+                .loginPage("/login").permitAll().and().logout().permitAll();
+        // .logout().logoutUrl("/logout").permitAll().logoutSuccessUrl("/login");
+        // .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception
+    {
+        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    /*
+     * @Bean public UserDetailsService userDetailsService() {
+     * InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
+     * manager.createUser(User.withUsername("user").password("password")
+     * .roles("USER").build()); return manager; }
+     */
 }
